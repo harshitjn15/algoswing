@@ -1,0 +1,1 @@
+"""AlgoSwing Backend Application"""

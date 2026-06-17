@@ -1,0 +1,25 @@
+{
+  "name": "AlgoSwing",
+  "short_name": "AlgoSwing",
+  "description": "Algorithmic swing trading signals — IPO ATH Retest strategy",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#070d1a",
+  "theme_color": "#0d9488",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "utilities"],
+  "icons": [],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Signals",
+      "url": "/signals",
+      "description": "View active trading signals"
+    },
+    {
+      "name": "Watchlist",
+      "url": "/watchlist",
+      "description": "View stock watchlist"
+    }
+  ]
+}

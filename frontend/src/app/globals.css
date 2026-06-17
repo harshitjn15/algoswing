@@ -1,0 +1,233 @@
+
+
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────── */
+:root {
+  --background: 222 47% 3%;
+  --foreground: 210 40% 98%;
+
+  --card: 222 47% 6%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222 47% 6%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 173 80% 45%;
+  --primary-foreground: 222 47% 5%;
+
+  --secondary: 222 30% 12%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 222 30% 12%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 173 80% 45%;
+  --accent-foreground: 222 47% 5%;
+
+  --destructive: 0 72% 56%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 222 30% 15%;
+  --input: 222 30% 15%;
+  --ring: 173 80% 45%;
+
+  --radius: 1rem;
+
+  --profit: 148 67% 50%;
+  --loss: 0 72% 56%;
+  --warning: 38 92% 55%;
+  --info: 217 91% 65%;
+}
+
+/* ── Base ─────────────────────────────────────── */
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Custom Utilities ─────────────────────────── */
+@layer utilities {
+  .text-profit { color: hsl(var(--profit)); }
+  .text-loss   { color: hsl(var(--loss)); }
+  .text-warning { color: hsl(var(--warning)); }
+
+  .bg-profit   { background-color: hsl(var(--profit) / 0.15); }
+  .bg-loss     { background-color: hsl(var(--loss) / 0.15); }
+  .bg-warning  { background-color: hsl(var(--warning) / 0.15); }
+
+  .border-profit { border-color: hsl(var(--profit) / 0.4); }
+  .border-loss   { border-color: hsl(var(--loss) / 0.4); }
+
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.25);
+  }
+
+  .glow-profit {
+    box-shadow: 0 0 16px hsl(var(--profit) / 0.2);
+  }
+
+  .glass {
+    background: linear-gradient(145deg, hsl(var(--card) / 0.6), hsl(var(--card) / 0.3));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    border-top: 1px solid hsl(210 40% 98% / 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-panel {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(200 100% 70%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-hover:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0.4);
+    border-color: hsl(var(--primary) / 0.4);
+  }
+
+  .ticker-up   { color: hsl(var(--profit)); }
+  .ticker-down { color: hsl(var(--loss)); }
+}
+
+/* ── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* ── Animations ──────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-slide-in { animation: slide-in-up 0.3s ease forwards; }
+.animate-fade-in  { animation: fade-in 0.2s ease forwards; }
+
+.skeleton {
+  background: linear-gradient(90deg,
+    hsl(var(--card)) 25%,
+    hsl(222 30% 12%) 50%,
+    hsl(var(--card)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Recharts custom ─────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  border-radius: 8px !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: hsl(var(--border));
+}
+
+/* ── Sidebar ─────────────────────────────────── */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.5rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+}
+
+.sidebar-link.active {
+  background: hsl(var(--primary) / 0.15);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.3);
+}
+
+/* ── Status badges ─────────────────────────── */
+.badge-active {
+  background-color: hsl(148 67% 45% / 0.15);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+.badge-expired {
+  background-color: hsl(222 30% 14%);
+  color: hsl(215 20% 55%);
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+.badge-sl {
+  background-color: hsl(0 72% 51% / 0.15);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+.badge-high   { color: hsl(var(--profit)); }
+.badge-medium { color: hsl(var(--warning)); }
+.badge-low    { color: hsl(var(--muted-foreground)); }
+
+/* ── Mobile PWA ──────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar-desktop { display: none; }
+}

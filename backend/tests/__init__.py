@@ -1,0 +1,1 @@
+"""AlgoSwing — Tests Package"""
