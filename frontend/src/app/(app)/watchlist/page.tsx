@@ -29,7 +29,7 @@ type SortField = "symbol" | "last_close" | "ath" | "ath_distance_pct" | "volume_
 
 export default function WatchlistPage() {
   const queryClient = useQueryClient();
-  const [nearAthOnly, setNearAthOnly] = useState(false);
+  const [nearAthOnly, setNearAthOnly] = useState(true);
   const [search, setSearch] = useState("");
   const [isScanning, setIsScanning] = useState(false);
   

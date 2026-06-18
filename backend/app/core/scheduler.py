@@ -111,13 +111,13 @@ def setup_scheduler() -> AsyncIOScheduler:
     """Register all scheduled jobs and return configured scheduler."""
     scheduler = get_scheduler()
 
-    # Scanner job — every N minutes during market hours
+    # Scanner job — morning and night
     scheduler.add_job(
         run_scanner_job,
-        trigger=IntervalTrigger(
-            minutes=settings.scanner_interval_minutes,
-            timezone=IST,
+        trigger=CronTrigger(
+            hour="9,21", minute="15", timezone=IST
         ),
+        kwargs={"force": True},
         id="ipo_scanner",
         name="IPO Base Scan + ATH Retest Strategy",
         replace_existing=True,
